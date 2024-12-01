@@ -1,0 +1,89 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Georgia', serif; /
+    
+}
+#myVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: -1; 
+}
+
+#title {
+    position: absolute;
+    top: 5%; 
+    left: 38.5%; 
+    
+    font-size: 8em;
+    color: white;
+    
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    
+}
+
+#Cook {
+    font-size: 3em;
+    position: absolute;
+    top: 45%;
+    left: 36%;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.737); 
+    border-radius: 30px;
+    width: 8.8em;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    text-align: center;
+    cursor: pointer;
+    transition:0.3s ease;
+    
+}
+#Cook:hover{
+    transform: scale(1.05);
+}
+.italianno-regular {
+    font-family: "Italianno", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+footer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    bottom:0%;
+    color: white;
+    z-index: 2;
+    padding-top: 44em;
+
+}
+
+.instagram, .facebook {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1em; 
+    cursor: pointer;
+    margin-left: 5em;
+    margin-right: 5em;
+}
+
+.instagram img, .facebook img {
+    color: white;
+    width: 2em; 
+    height: 2em; 
+}
+
+.instagram span, .facebook span {
+    font-size: 1.5em; 
+    color: white;
+}

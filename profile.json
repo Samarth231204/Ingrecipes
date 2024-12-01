@@ -1,0 +1,67 @@
+[
+    {
+      "id": 1,
+      "name": "Tomato Soup",
+      "description": "A classic creamy tomato soup with fresh basil and garlic.",
+      "image": "media/soup.jpg",
+      "ingredients": ["tomato", "cream", "basil"],
+      "link": "tomatosoup.html"
+    },
+    {
+      "id": 2,
+      "name": "Tomato Mac and Cheese",
+      "description": "A cheesy twist to your mac and cheese with a touch of tomato goodness.",
+      "image": "media/mac cheese.jpg",
+      "ingredients": ["macaroni", "cheese", "tomato"],
+      "link": "macandcheese.html"
+    },
+
+    {
+        "id": 3,
+        "name": "Tomato Bake",
+        "description": "Juicy baked tomatoes topped with herbs and melted cheese.",
+        "image": "media/tomato bake.jpg",
+        "ingredients": ["cream", "milk", "tomato"],
+        "link": "tomatobake.html"
+      },
+      {
+        "id": 4,
+        "name": "Tomato Salad",
+        "description": "Fresh tomato salad with a zesty, herb-infused dressing.",
+        "image": "media/tomato salad.avif",
+        "ingredients": ["cream", "milk", "tomato"],
+        "link": "tomatosalad.html"
+      },
+
+      {
+        "id": 5,
+        "name": "Banana Smoothie",
+        "description": "A creamy and refreshing banana smoothie, perfect for a quick energy boost.",
+        "image": "media/banana smoothie.avif",
+        "ingredients": ["banana", "milk"],
+        "link": "bananasmoothie.html"
+    },
+
+    {
+        "id": 6,
+        "name": "Gajar Halwa",
+        "description": "A rich, traditional Indian dessert made with carrots, milk, and ghee.",
+        "image": "media/gajar-halwa.jpeg",
+        "ingredients": ["carrot", "milk", "ghee", "sugar", "cardamom"],
+        "link": "gajarhalwa.html"
+    },
+    {
+      "id": 7,
+      "name": "Mutton Biryani",
+      "description": "A rich, traditional Indian dessert made with carrots, milk, and ghee.",
+      "image": "media/mutton.jpeg",
+      "ingredients": ["mutton","rice"],
+      "link": "muttonbiryani.html"
+  }
+    
+    
+
+
+    
+  ]
+  

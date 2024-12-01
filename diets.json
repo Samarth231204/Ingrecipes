@@ -1,0 +1,62 @@
+[
+    { 
+        "name": "Keto Diet", 
+        "description": "A high-fat, low-carb diet to induce ketosis, often used for weight loss.",
+        "image": "assests/keto.png",
+        "link": "keto-diet-details.html"
+    },
+    { 
+        "name": "Vegan Diet", 
+        "description": "A plant-based diet with no animal products, rich in fruits, vegetables, and grains.",
+        "image": "assests/vegan.png",
+        "link": "vegan-diet-details.html"
+    },
+    { 
+        "name": "Mediterranean Diet", 
+        "description": "A diet rich in fruits, vegetables, nuts, whole grains, and healthy fats like olive oil.",
+        "image": "assests/mediterranian.png",
+        "link": "mediterranean-diet-details.html"
+    },
+    { 
+        "name": "Paleo Diet", 
+        "description": "A diet based on foods that would have been available to our Paleolithic ancestors, such as meat, fish, fruits, and vegetables.",
+        "image": "assests/paleo.png",
+        "link": "paleo-diet-details.html"
+    },
+    { 
+        "name": "Low Carb Diet", 
+        "description": "A diet that reduces carbohydrate intake to promote weight loss and improve metabolic health.",
+        "image": "assests/low-carb.png",
+        "link": "low-carb-diet-details.html"
+    },
+    { 
+        "name": "Intermittent Fasting", 
+        "description": "An eating pattern that cycles between periods of fasting and eating, which may help with weight loss and metabolic health.",
+        "image": "assests/intermittent-fasting.png",
+        "link": "intermittent-fasting-details.html"
+    },
+    { 
+        "name": "Whole30 Diet", 
+        "description": "A 30-day program designed to reset your body and eliminate unhealthy cravings, focusing on whole foods.",
+        "image": "assests/whole-30.png",
+        "link": "whole30-diet-details.html"
+    },
+    { 
+        "name": "Gluten-Free Diet", 
+        "description": "A diet that excludes gluten, a protein found in wheat, barley, and rye, beneficial for those with gluten intolerance or celiac disease.",
+        "image": "assests/gluten-free.png",
+        "link": "gluten-free-diet-details.html"
+    },
+    { 
+        "name": "Bodybuilding Diet", 
+        "description": "A high-protein, nutrient-dense diet designed to support muscle growth, improve strength, and aid in recovery for bodybuilders.",
+        "image": "assests/body-building.png",
+        "link": "bodybuild.html"
+    },
+    {
+        "name": "Bodybuilding Diet", 
+        "description": "A high-protein, nutrient-dense diet designed to support muscle growth, improve strength, and aid in recovery for bodybuilders.",
+        "image": "assests/body-building.png",
+        "link": "bodybuild.html" 
+    }
+]

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-Up</title>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <div class="title">
+            <h1>Ingrecipes</h1>
+        </div>
+        <div class="quote">
+            <h1>It is said that it's the belly that rules the mind...</h1>
+        </div>
+    </header>
+    <div class="container">
+        <div class="img">
+            <img src="./assests/new.png">
+        </div>
+        <div class="Signup-page">
+            <div class="signup">
+                <h1>Sign-Up</h1>
+            </div>
+            <div class="form">
+            <form action="">
+
+                <input type="Text"
+                       id="username"
+                       name="username"
+                       placeholder="Username" required>
+    
+                <br>
+                
+                <input type="email"
+                       id="email"
+                       name="email"
+                       placeholder="E-mail." required>
+    
+                <br>
+                
+                <input type="password"
+                       id="password" 
+                       name="password"
+                       placeholder="Password" required>
+
+                <br>
+                
+                <input type="password"
+                       id="ConfirmPassword" 
+                       name="Confirm password"
+                       placeholder="Confirm Password" required>
+                       <button type="submit" id = "submitSignup">
+                       Submit
+                    </button>
+    
+            </form>
+            </div>  
+            
+        </div>
+    </div>
+    <footer>
+        <div class="right-part">
+            <div class="logo">
+                <img src="./assests/logo.png" alt="">
+                
+                
+            </div>
+            <div class="logo-name">
+                Ingrecipes
+            </div>
+            <div class="social-media">
+                <div class="image1"><img src="./assests/instagram.png" alt="" ></div>
+                <div class="image2"><img src="./assests/facebook.png" alt="" ></div>
+                <div class="image3"><img src="./assests/twitter.png" alt="" ></div>
+            </div>
+            <div class="email">
+                <img src="./assests/email.png" alt="">
+                <div class="phone-no">+91-8708192803
+                    <div class="mail">ingrecipes@gmail.com</div>
+                </div>
+            </div>
+        </div>
+        <div class="left-part">
+            <div class="home">
+                
+                <ul>
+                    <li><a href="./home.html">Home</a></li>
+                    <li><a href="./pantry.html">Generate recipes</a></li>
+                    <li><a href="./dietPlanner.html">Diet Plan</a></li>
+                    
+                </ul>
+            </div>
+            <div class="aboutus">
+                <p><a href="">About Us</a></p>
+                <ul>
+                    <li><a href="">Our Aim</a></li>
+                </ul>
+            </div>
+            <div class="legal">
+                
+                <ul>
+                    <li><a href="">Terms of Services</a></li>
+                    <li><a href="">Privacy Policy</a></li>
+                    <li><a href="">Cookie Settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        document.getElementById("submitSignup").addEventListener("click",async function(event){
+            event.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("ConfirmPassword").value;
+
+        if (password!=confirmPassword){
+            alert("Passwords do not match");
+            return
+        }
+        try{
+            const response  = await fetch("http://localhost:3000/api/auth/register",{
+                method : "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({username,email,password}),
+            });
+
+            const data = await response.json();
+            if(response.ok){
+                alert("Signup Succesful");
+                window.location.href = "login.html"; // redirectig to login . html
+
+            }
+            else{
+                alert(data.message|| "Signup Failed")
+            }
+
+        }catch(error){
+            console.error("Error during signup:", error);
+            alert("An error occurred. Please try again.");
+        }
+        });
+    </script>
+</body>
+</html>

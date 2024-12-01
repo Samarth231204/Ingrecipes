@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Pantry</title>
+    <link rel="stylesheet" href="profilepantry.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+   
+
+    <div class="big-container">
+    
+            <div id="menu">
+            <div id="back-button"  style="position: absolute; top: 20px; left: 20px; cursor: pointer;">
+                <i class="fas fa-arrow-left" style="font-size: 24px; color: black;"></i>
+            </div>
+            <h1 id="pantry">Pantry</h1>
+            <div id="search-container">
+                <input type="text" id="search-bar" placeholder="Search Ingredients...">
+                <button id="search-button">🔍</button>
+            </div>
+            <div id="items">
+                <h2>Fruits</h2>
+                <ul>
+                    <li class="item">Apple</li>
+                    <li class="item">Banana</li>
+                    <li class="item">Orange</li>
+                    <li class="item">Strawberry</li>
+                    <li class="item">Blueberry</li>
+                    <li class="item">Pear</li>
+                    <li class="item">Lemon</li>
+                </ul>
+                <h2>Vegetables</h2>
+                <ul>
+                    <li class="item">Carrot</li>
+                    <li class="item">Broccoli</li>
+                    <li class="item">Spinach</li>
+                    <li class="item">Basil</li>
+                    <li class="item">Tomato</li>
+                </ul>
+                <h2>Dairy</h2>
+                <ul>
+                    <li class="item">Milk</li>
+                    <li class="item">Cheese</li>
+                    <li class="item">Yogurt</li>
+                    <li class="item">Cream</li>
+
+
+                </ul>
+                <h2>Meat</h2>
+                <ul>
+                    <li class="item">Chicken</li>
+                    <li class="item">Red Meat</li>
+                    <li class="item">Mutton</li>
+                    <li class="item">Fish</li>
+                    <li class="item">Prawn</li>
+                </ul>
+            </div>
+        </div>
+        <div id="search-bar-right">
+        <input type="text" id="search-bar-r" placeholder="Search..." oninput="searchRecipe()">
+            <button id="search-button" onclick="searchRecipe()">🔍</button>
+        </div>
+        <div id="recipe-section">
+           <div id="recipe-container"></div>
+        </div>
+        <div class="right-section">
+            <div class="container">
+                <div class="header">
+                    <p>Hi Samarth</p>
+                </div>
+                <div class="section">
+                    <div class="section-title">Favourites:</div>
+
+                    <div id="favourites-list"></div>
+                   
+                </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   
+
+    <script>
+function searchRecipe() {
+    let searchQuery = document.getElementById('search-bar-r').value.toLowerCase().trim();
+    let recipeItems = document.querySelectorAll('.recipe-card');
+    let anyMatchFound = false; 
+
+    recipeItems.forEach(function(recipe) {
+        let recipeTitle = recipe.querySelector('.recipe-title').textContent.toLowerCase();
+
+        if (recipeTitle.includes(searchQuery) && searchQuery !== "") {
+            recipe.style.display = 'flex'; 
+            anyMatchFound = true;
+        } else {
+            recipe.style.display = 'none';
+        }
+    });
+
+    if (!anyMatchFound && searchQuery !== "") {
+        console.log("No matches found");
+    }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    let selectedIngredients = [];
+
+    function toggleIngredient(ingredient) {
+        const index = selectedIngredients.indexOf(ingredient);
+        if (index > -1) {
+            selectedIngredients.splice(index, 1);
+        } else {
+            selectedIngredients.push(ingredient);
+        }
+        filterRecipes();
+    }
+
+    function filterRecipes() {
+        const recipeCards = document.querySelectorAll('.recipe-card');
+
+        recipeCards.forEach(card => {
+            const ingredients = card.getAttribute('data-ingredients').toLowerCase().split(', ');
+            const hasAllSelectedIngredients = selectedIngredients.every(ingredient => 
+                ingredients.includes(ingredient.toLowerCase())
+            );
+
+            card.style.display = hasAllSelectedIngredients ? 'flex' : 'none';
+        });
+    }
+
+    const ingredientItems = document.querySelectorAll('.item');
+    ingredientItems.forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('selected'); 
+            toggleIngredient(item.textContent.trim()); 
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const ingredientItems = document.querySelectorAll('#items .item');
+
+    
+    ingredientItems.forEach(item => {
+        item.addEventListener('click', () => {
+            
+            item.classList.toggle('highlighted');
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded',()=>{
+    fetch('profile.json')
+    .then(response=>response.json())
+    .then(data=>{
+        displayRecipes(data);
+    })
+})
+
+function displayRecipes(recipes){
+    const recipeContainer = document.getElementById('recipe-container');
+    recipeContainer.innerHTML = '';
+
+    recipes.forEach(recipe=>{
+        const recipeCard = document.createElement('div');
+        recipeCard.classList.add('recipe-card');
+        recipeCard.setAttribute('data-name',recipe.name);
+        recipeCard.setAttribute('data-ingredients',recipe.ingredients.join(', '));
+
+        const heartIcon = document.createElement('i');
+        heartIcon.classList.add('fas', 'fa-heart', 'favourite-icon');
+
+        heartIcon.addEventListener('click', function () {
+            this.classList.toggle('favourited');
+            const recipeTitle = recipe.name;
+
+            const favouritesList = document.getElementById('favourites-list');
+            const existingFavorite = [...favouritesList.children].find(item => item.textContent === recipeTitle);
+
+            if (this.classList.contains('favourited')) {
+                if (!existingFavorite) {
+                    const favouriteItem = document.createElement('div');
+                    favouriteItem.className = 'item';
+                    favouriteItem.textContent = recipeTitle;
+                    favouritesList.appendChild(favouriteItem);
+                }
+            } else {
+                if (existingFavorite) {
+                    favouritesList.removeChild(existingFavorite);
+                }
+            }
+        });
+
+
+
+        const img = document.createElement('img');
+        img.src = recipe.image || 'default.jpg';
+        img.alt = `Recipe Image for ${recipe.name}`;
+        img.classList.add('recipe-image');
+
+
+        const recipeLink = document.createElement('a');
+        recipeLink.href = recipe.link || '#';
+        recipeLink.classList.add('recipe-title');
+        recipeLink.textContent = recipe.name;
+
+
+        const description = document.createElement('p');
+        description.classList.add('recipe-description');
+        description.textContent = recipe.description;
+
+
+        recipeCard.appendChild(heartIcon);
+        recipeCard.appendChild(img);
+        recipeCard.appendChild(recipeLink);
+        recipeCard.appendChild(description);
+
+
+        recipeContainer.appendChild(recipeCard);
+
+
+
+
+    })
+}
+    </script>
+</body>
+</html>

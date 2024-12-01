@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Planner</title>
+    <link rel="stylesheet" href="dietPlanner.css">
+  
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- <header>
+        <div class="leftpart">
+            <div class="title">
+                <h1>Ingrecipes</h1>
+            </div>
+            <div class="pages">
+                <p><a href="profilepantry.html">Generate recipes</a></p>
+                <p><a href="Add_a_recipe.html">Add a recipe</a></p>
+                <p><a href="yourrecipe.html">Saved recipes</a></p>
+                <p><a href="dietPlanner.html">Diet planner</a></p>
+            </div>
+        </div>
+        <div class="rightpart">
+            <div class="socialmedia">
+                <div class="image1"><img src="./assests/instagram.png" alt="" ></div>
+                <div class="image2"><img src="./assests/facebook.png" alt="" ></div>
+                <div class="image3"><img src="./assests/twitter.png" alt="" ></div>
+            </div>
+        </div>
+    </header> -->
+    <div class="container">
+       
+    </div>
+    
+    <script>
+    class DietManager {
+        constructor(jsonPath, containerSelector) {
+            this.jsonPath = jsonPath;
+            this.container = document.querySelector(containerSelector);
+        }
+    
+        async fetchDietData() {
+            try {
+                const response = await fetch(this.jsonPath);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error("Error fetching diet data: ", error);
+            }
+        }
+    
+        createDietCard(diet) {
+            const dietCard = document.createElement("div");
+            dietCard.classList.add("diet-card");
+    
+            dietCard.innerHTML = `
+                <div class="image-container">
+                    <img src="${diet.image}" alt="${diet.name}">
+                </div>
+                <div class="diet-info">
+                    <a href="${diet.link}">
+                        <h2 class="diet-title">${diet.name}</h2>
+                    </a>
+                    <p class="diet-description">${diet.description}</p>
+                </div>`;
+            
+            return dietCard;
+        }
+    
+        async renderDiets() {
+            const diets = await this.fetchDietData();
+            if (diets && this.container) {
+                diets.forEach(diet => {
+                    const dietCard = this.createDietCard(diet);
+                    this.container.appendChild(dietCard);
+                });
+            }
+        }
+    }
+    
+    // Initialize and render diet cards
+    document.addEventListener('DOMContentLoaded', () => {
+        const dietManager = new DietManager('diets.json', '.container');
+        dietManager.renderDiets();
+    });
+</script>    
+</body>
+</html>

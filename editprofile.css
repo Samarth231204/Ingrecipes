@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    background: url('./assests/new.png') no-repeat center center fixed; 
+    background-size: cover; 
+    color: #333;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    overflow: scroll; 
+    overflow-x: hidden;
+}
+
+/* Form Container */
+.container {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    margin: 2rem auto; /* Adds space to prevent cutting */
+    box-sizing: border-box;
+}
+
+/* Heading Styling */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #333; /* Dark gray */
+}
+
+/* Labels */
+label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #555; /* Slightly lighter gray for labels */
+    text-align: left;
+}
+
+/* Input Fields */
+input,
+select {
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background-color: whitesmoke;
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: #ff6347; /* Tomato color */
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e5533d; /* Slightly darker shade on hover */
+}
