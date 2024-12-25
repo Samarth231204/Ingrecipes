@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 // schema creation is happening here  like key value pairs in dictionary
 const userSchema = new mongoose.Schema({
+    
     username: {
         type: String,
         required: true,
