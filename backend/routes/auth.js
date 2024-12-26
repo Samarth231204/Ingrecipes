@@ -1,5 +1,5 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');  // Import bcrypt for hashing passwords
+const crypto = require('crypto');  // Import crypto module for password hashing
 const User = require('../models/user');
 const router = express.Router();
 
@@ -18,28 +18,39 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        // Hash the password before saving it
-        const hashedPassword = await bcrypt.hash(password, 10); // 10 rounds of salt
+        // Generate a salt for password hashing
+        const salt = crypto.randomBytes(16).toString('hex');
+        console.log('Salt Generated:', salt); // Debugging log
 
-        // Create a new user with hashed password
-        const newUser = new User({
-            username,
-            email,
-            password: hashedPassword, // Store the hashed password
+        // Hash the password using scrypt
+        crypto.scrypt(password, salt, 64, async (err, derivedKey) => {
+            if (err) {
+                console.error('Error during hashing:', err); // Debugging log
+                return res.status(500).json({ message: 'Error hashing password', error: err.message });
+            }
+
+            const hashedPassword = `${salt}:${derivedKey.toString('hex')}`;
+            console.log('Hashed Password:', hashedPassword); // Debugging log
+
+            // Create a new user with hashed password
+            const newUser = new User({
+                username,
+                email,
+                password: hashedPassword, // Store the hashed password
+            });
+
+            // Save the new user to the database
+            await newUser.save();
+            res.status(201).json({ message: 'User registered successfully' });
         });
-
-        // Save the new user to the database
-        await newUser.save();
-
-        res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
+        console.error('Error registering user:', error); // Debugging log
         res.status(500).json({ message: 'Error registering user', error: error.message });
     }
 });
 
 // Login Route
 router.post('/login', async (req, res) => {
-    console.log('Received login request:', req.body);
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -53,15 +64,31 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'User not found' });
         }
 
-        // Compare the entered password with the stored hashed password
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid password' });
-        }
+        // Split the stored password into salt and hash
+        const [salt, storedHash] = user.password.split(':');
+        console.log('Stored Salt:', salt); // Debugging log
+        console.log('Stored Hash:', storedHash); // Debugging log
 
-        // Login successful
-        res.status(200).json({ message: 'Login successful' });
+        // Rehash the entered password using the stored salt
+        const derivedKey = await new Promise((resolve, reject) => {
+            crypto.scrypt(password, salt, 64, (err, derivedKey) => {
+                if (err) return reject(err);
+                resolve(derivedKey);
+            });
+        });
+
+        const inputHash = derivedKey.toString('hex');
+        console.log('Input Hash:', inputHash); // Debugging log
+
+        // Compare the hashed password
+        if (inputHash === storedHash) {
+            res.status(200).json({ message: 'Login successful' });
+        } else {
+            console.log('Password mismatch'); // Debugging log
+            res.status(400).json({ message: 'Invalid password' });
+        }
     } catch (error) {
+        console.error('Error logging in:', error); // Debugging log
         res.status(500).json({ message: 'Error logging in', error: error.message });
     }
 });
