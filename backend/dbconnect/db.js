@@ -1,11 +1,18 @@
 const mongoose = require('mongoose');
 
-// Use the MONGO_URI from environment variables or fallback to a default if running locally
+// Access MongoDB URI from environment variables
 const MONGO_URI = process.env.MONGO_URI;
 
 const connectDB = async () => {
     try {
-        // Connect to MongoDB
+        // Log the MONGO_URI to check if it's loaded correctly
+        console.log('MongoDB URI:', MONGO_URI);  
+
+        if (!MONGO_URI) {
+            throw new Error("MONGO_URI is not defined");
+        }
+
+        // Attempt to connect to MongoDB using the URI
         await mongoose.connect(MONGO_URI);
         console.log('MongoDB connected...');
     } catch (error) {

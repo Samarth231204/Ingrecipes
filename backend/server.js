@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const connectDB = require('./dbconnect/db'); // Assuming your MongoDB connection function
 const routes = require('./routes');
