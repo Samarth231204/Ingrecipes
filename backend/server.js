@@ -1,18 +1,18 @@
 const express = require('express');
-const connectDB = require('./dbconnect/db'); 
-
-const routes = require('./routes'); 
+const connectDB = require('./dbconnect/db'); // Assuming your MongoDB connection function
+const routes = require('./routes');
 const authRoutes = require('./routes/auth');
 const profileRoutes = require('./routes/profiles');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 const path = require('path'); // To resolve file paths for static files
-
 const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
 
-// Connect to MongoDB
+// Use the PORT environment variable for Render or fall back to 3000 for local development
+const PORT = process.env.PORT || 3000; 
+
+// Connect to MongoDB (Make sure your connectDB function uses process.env.MONGO_URI)
 connectDB();  
 
 // Middleware for JSON parsing
@@ -32,7 +32,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
 
-// Start the server
+// Start the server and log the URL
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
