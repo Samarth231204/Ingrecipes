@@ -68,7 +68,7 @@
 
         try {
             // Send the request to either update or create the profile
-            const response = await fetch('http://localhost:3000/api/profile/edit-profile', {
+            const response = await fetch('https://ingrecipes-final.onrender.com/api/profile/edit-profile', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(profileData),
