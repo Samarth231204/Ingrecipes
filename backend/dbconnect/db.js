@@ -12,7 +12,7 @@ const connectDB = async () => {
             throw new Error("MONGO_URI is not defined");
         }
 
-        // Attempt to connect to MongoDB using the URI
+        // Attempt to connect to MongoDB using the URI (without deprecated options)
         await mongoose.connect(MONGO_URI);
         console.log('MongoDB connected...');
     } catch (error) {
