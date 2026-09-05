@@ -1,0 +1,3 @@
+# Recipe Summary
+
+This repository contains a collection of recipes covering a variety of cuisines and dietary preferences. Each recipe includes a list of ingredients, step-by-step instructions, cooking times, and nutritional information. The recipes are organized into categories such as appetizers, main courses, desserts, and vegan options, providing a comprehensive guide for home cooks and food enthusiasts alike.
